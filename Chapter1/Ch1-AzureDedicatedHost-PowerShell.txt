@@ -1,0 +1,35 @@
+#Define variables
+$rg = "RG01"
+$location = "East US"
+$vnet = "vNet-01"
+$HostGrpName = "HostGroup"
+$Dhostname = "DHost-01"
+$vm = "VM01"
+#Create Host Group
+New-AzHostGroup `
+   -Location $location `
+   -Name $HostGrpName `
+   -PlatformFaultDomain 2 `
+   -ResourceGroupName $rg `
+   -Zone 1
+#Create Dedicated Host
+New-AzHost `
+   -HostGroupName $hostGrpName `
+   -Location $location `
+    -Name $Dhostname `
+   -ResourceGroupName $rg `
+   -Sku ESv3-Type1 `
+   -AutoReplaceOnFailure 1 `
+   -PlatformFaultDomain 1
+#Define Credentials
+$cred = Get-Credential
+#Create VM in Dedicated Host
+New-AzVM `
+   -Credential $cred `
+   -ResourceGroupName $rg `
+   -Location $location `
+   -Name $vm `
+   -HostId $dhost.Id `
+   -Size Standard_E2s_v3 `
+   -Image Win2019Datacenter `
+   -Zone 1

@@ -1,0 +1,10 @@
+#Define variables
+rg="VMSS-RG01"
+vmssname="VMSS01"
+location="EastUS2"
+#create VMSS with Azure Hybrid Benefit
+az vm create \
+    --resource-group $rg \
+    --name $vmssname \
+    --location $location \
+    --license-type Windows_Server

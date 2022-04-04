@@ -1,0 +1,23 @@
+To trigger a one-time backup, use the following code:
+#Set variables
+$resourcegroup="AppServiceRG01"
+$appname="mywebapp$(Get-Random -Minimum 100000 -Maximum 999999)"
+$storageaccountname="backupsstorage"
+$storagecontainer="backups"
+$location="East US 2"
+$backupname="BackupOnce"
+# Generate an SAS token for the storage container, valid for one month.
+$sastokenUrl = New-AzStorageContainerSASToken -Name $storagecontainer -Permission rwdl -Context $storageaccountname.Context -ExpiryTime (Get-Date).AddMonths(1) -FullUri
+# Create a one-time backup
+New-AzWebAppBackup -ResourceGroupName $resourcegroup -Name $appname -StorageAccountUrl $sastokenUrl -BackupName $backupname
+To schedule a backup, use the following code:
+#Set variables
+$resourcegroup="AppServiceRG01"
+$appname="MSBPAPP01"
+$storageaccountname="backupsstorage"
+$storagecontainer="backups"
+$location="East US 2"
+# Generate an SAS token for the storage container, valid for 1 year.
+$sastokenUrl = New-AzStorageContainerSASToken -Name $storagecontainer -Permission rwdl -Context $storageaccountname.Context -ExpiryTime (Get-Date).AddYears(1) -FullUri
+# Schedule a backup every day, beginning in two hours, and retain for 30 days
+Edit-AzWebAppBackupConfiguration -ResourceGroupName $resourcegroup -Name $appname -StorageAccountUrl $sastokenUrl -FrequencyInterval 1 -FrequencyUnit Day -KeepAtLeastOneBackup -StartTime (Get-Date).AddHours(2) -RetentionPeriodInDays 30

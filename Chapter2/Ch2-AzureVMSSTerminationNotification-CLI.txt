@@ -1,0 +1,11 @@
+#Define variables
+rg="VMSS-RG01"
+vmssname="VMSS-01"
+adminusername="vmssadmin"
+#Create VMSS with termination notification config
+az vmss create --resource-group $rg \
+  --name $vmssname \
+  --image UbuntuLTS \
+  --admin-username $adminusername \
+  --generate-ssh-keys \
+  --terminate-notification-time 20

@@ -1,0 +1,19 @@
+#Define variables
+$RG = "RG01"
+$location = "EastUS2"
+$ppgroupName = "PPG-VMSS-01"
+$vmscaleset = "VMSS-ScaleSet"
+
+#Create Proximity Placement group
+$ppgroup = New-AzProximityPlacementGroup -Location $location `
+   -Name $ppgroupName `
+   -ResourceGroupName $RG `
+   -ProximityPlacementGroupType Standard
+#Move an existing scale set into the proximity group
+""
+#Stop vm scale set
+
+Stop-AzVmss -VMScaleSetName $vmscaleset.Name -ResourceGroupName $RG
+#update scale set config
+Update-AzVmss -VMScaleSetName $vmscaleset.Name -ResourceGroupName $RG -ProximityPlacementGroupId $ppgroup.Id
+Start-AzVmss -VMScaleSetName $vmscaleset.Name -ResourceGroupName $RG

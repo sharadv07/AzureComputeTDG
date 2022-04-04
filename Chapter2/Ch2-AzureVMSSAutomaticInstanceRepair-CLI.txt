@@ -1,0 +1,17 @@
+#Define variables
+location="EastUS2"
+rg="VMSS-RG01"
+adminuser="vmssadmin"
+loadbalancer="VMSS01-LB"
+vmssname="VMSS-01"
+vmsshealthprobe="VMSS-LB01-HP01"
+#Setup VMSS with automatic instance repair config
+az vmss create \
+  --resource-group $rg \
+  --name $vmssname \
+  --image UbuntuLTS \
+  --admin-username $adminuser \
+  --generate-ssh-keys \
+  --load-balancer $loadbalancer \
+  --health-probe $vmsshealthprobe \
+  --automatic-repairs-grace-period 30

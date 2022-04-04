@@ -1,0 +1,6 @@
+#Define variables
+rg="RG01"
+location="EastUS2"
+vm="vm01"
+# Create VM
+az vm create --resource-group $rg --name $vm --location $location --image Win2019Datacenter --zone 2

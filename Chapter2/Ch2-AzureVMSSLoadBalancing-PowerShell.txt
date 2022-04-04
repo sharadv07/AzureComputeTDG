@@ -1,0 +1,16 @@
+#Define variables
+$rg = "VMSS-RG01"
+$vmssname = "VMSS-01"
+$location = "EastUS2"
+$vnet = "VMSS01-vNET"
+$subnet = "VMSS01-Subnet"
+$loadbalancer = "VMSS01-LB"
+#Create VMSS with load balancer
+New-AzVmss `
+  -ResourceGroupName $rg `
+  -Location $location `
+  -VMScaleSetName $vmssname `
+  -VirtualNetworkName $vnet `
+  -SubnetName $subnet `
+  -PublicIpAddressName "VMSS01-PublicIPAddress" `
+  -LoadBalancerName $loadbalancer

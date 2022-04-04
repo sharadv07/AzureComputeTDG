@@ -1,0 +1,38 @@
+#Define variables
+$RG = "VMSS-RG01"
+$location = "East US 2"
+$hostgroup = "VMSS-HostGroup01"
+$hostname = "VMSS-Host01"
+$vmssname = "VMSS01"
+$vnet = "VMSS01-vNET"
+$subnet = "VMSS01-Subnet"
+$vmsspip = "VMSS01-PIP"
+$vmsslb = "VMSS01-Loadbalancer"
+New-AzResourceGroup -Location $location -Name $rgName
+$hostGroup = New-AzHostGroup `
+   -Location $location `
+   -Name $hostgroup `
+   -PlatformFaultDomain 2 `
+   -ResourceGroupName $RG `
+   -Zone 1
+
+#Create the Dedicated Host
+$dHost = New-AzHost `
+   -HostGroupName $hostGroup.Name `
+   -Location $location -Name $hostname `
+   -ResourceGroupName $RG `
+   -Sku DSv3-Type1 `
+   -AutoReplaceOnFailure 1 `
+   -PlatformFaultDomain 1
+
+#Create a new scale set in the host group
+New-AzVmss `
+  -ResourceGroupName $RG `
+  -Location $location `
+  -VMScaleSetName $vmssname `
+  -VirtualNetworkName $vnet `
+  -SubnetName $subnet `
+  -PublicIpAddressName $vmsspip `
+  -LoadBalancerName $vmsslb `
+  -UpgradePolicyMode "Automatic"`
+  -HostGroupId $hostGroup.Id

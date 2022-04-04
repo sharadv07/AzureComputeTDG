@@ -1,0 +1,9 @@
+#Define variables
+$RG = "VMSS-RG01"
+$VMSSName = "VMSS-01"
+#Update Instance protection config
+Update-AzVmssVM `
+  -ResourceGroupName $RG `
+  -VMScaleSetName $VMSSName `
+  -InstanceId 0 `
+  -ProtectFromScaleIn $true

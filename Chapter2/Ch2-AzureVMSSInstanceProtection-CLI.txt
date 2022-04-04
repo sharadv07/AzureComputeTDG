@@ -1,0 +1,10 @@
+#Define variables
+rg="VMSS-RG01"
+vmssname="VMSS-01"
+
+#Update Instance protection config
+az vmss update \  
+  --resource-group $rg \
+  --name $vmssname \
+  --instance-id 0 \
+  --protect-from-scale-in true

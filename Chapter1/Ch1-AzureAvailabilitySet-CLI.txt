@@ -1,0 +1,25 @@
+#Define variables
+rg="RG02"
+avs="AVSet-01"
+vm="VM-02"
+vnet="vNET-01"
+subnet="Subnet-01"
+avs="AVSet-01"
+publicip="publicip-01"
+#Create availability set
+az vm availability-set create \
+    --resource-group $rg \
+    --name $avs \
+    --platform-fault-domain-count 2 \
+    --platform-update-domain-count 5
+# Create VM inside the availability set
+az vm create \
+     --resource-group $rg \
+     --name $vm \
+     --availability-set $avs \
+     --vnet-name $vnet \
+     --subnet $subnet \
+     --public-ip-sku Standard \
+     --public-ip $publicip
+     --image Win2019Datacenter \
+     --admin-username azureuser

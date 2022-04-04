@@ -1,0 +1,6 @@
+#Define the variables for your environment
+$ResourceGroup = "{ResourceGroupName}"
+$AppServicePlan = "{Name-Of-AppServicePlan}"
+$Location = "{AzureRegionName}"
+#Set scaling config during plan creation
+New-AzAppServicePlan -ResourceGroupName $ResourceGroup -Name $AppServicePlan -Location $Location -Tier Standard -WorkerSize Small -NumberofWorkers 3 -PerSiteScaling $true

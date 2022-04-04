@@ -1,0 +1,13 @@
+#define variables
+ppg="VMSS-PPG"
+rg="RG01"
+location="eastus"
+vmssname="VMSS01"
+#create proximity placement group
+az ppg create \
+   -n $ppg \
+   -g $rg \
+   -l $location\
+   -t standard
+#create scale set with the proximity placement group
+az vmss create -n $vmssname -g $rg --instance-count 5 --image Win2019Datacenter --os-disk-size-gb 40 --ppg $ppg

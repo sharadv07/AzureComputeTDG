@@ -1,0 +1,1 @@
+New-AzWvdApplicationGroup -Name WindowsApps -ResourceGroupName WVD-RG01 -ApplicationGroupType "RemoteApp" -HostPoolArmPath '/subscriptions/7719ec11-92dd-457c-b393-5adc481214c79/resourceGroups/WVD-RG01/providers/Microsoft.DesktopVirtualization/hostPools/PooledHostPool01'-Location "East US 2"

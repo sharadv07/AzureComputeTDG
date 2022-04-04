@@ -1,0 +1,12 @@
+#Define variables
+rg="VMSS-RG01"
+name="VMSS-Set01"
+adminusername="vmssadminuser"
+# Create vmss in availability zones
+az vmss create --resource-group $rg\
+    --name $name \
+    --image UbuntuLTS \
+    --upgrade-policy-mode automatic \
+    --admin-username $adminusername\
+    --generate-ssh-keys \
+    --zones 1 2 3

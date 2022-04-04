@@ -1,0 +1,14 @@
+#!/bin/bash
+# Set the public GitHub repository URL, AppName and Location variables.
+githubrepo=https://github.com/Azure-Samples/html-docs-hello-world.git
+appname=MBSPWebApp01
+location=EastUS
+resourcegroup=AppServiceRG01
+# Create a resource group to host the App Service.
+az group create --location $location --name $resourcegroup
+# Create an App Service plan in Free tier.
+az appservice plan create --name $appname --resource-group $resourcegroup --sku FREE
+# Create a web app using the App Service Plan.
+az webapp create --name $appname --resource-group $resourcegroup --plan $appname
+# Configure GitHub deployment from your GitHub repo and deploy once.
+az webapp deployment source config --name $appname --resource-group $resourcegroup --repo-url $githubrepo --branch master --manual-integration

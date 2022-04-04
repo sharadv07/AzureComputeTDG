@@ -1,0 +1,7 @@
+To create a personal host pool, you could use the following code:
+
+az desktopvirtualization hostpool create --host-pool-type Personal --load-balancer-type Persistent --location eastus2 --name personalhosts2 --resource-group WVD-RG01 --description 'Test Pool' --friendly-name 'Personal Host Pool' --personal-desktop-assignment-type Automatic"
+
+Here’s the code to create a pooled host pool:
+
+az desktopvirtualization hostpool create --host-pool-type Pooled --load-balancer-type BreadthFirst --location eastus2 --name pooledhostpool01 --resource-group WVD-RG01 --description 'Test Pool' --friendly-name 'Pooled Host Pool' --max-session-limit 20 --personal-desktop-assignment-type Automatic

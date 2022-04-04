@@ -1,0 +1,19 @@
+#Define variables
+rg="VMSS-RG01"
+vmssname="VMSS-01"
+adminusername="vmssadmin"
+loadbalancer="VMSS01-LB"
+vnet="VMSS01-vNet"
+subnet="VMSS01-Subnet"
+#Create the VM scale set with a load balancer
+az vmss create \
+  --resource-group $rg \
+  --name $vmssname \
+  --image UbuntuLTS \
+  --upgrade-policy-mode automatic \
+  --admin-username $adminusername \
+  --generate-ssh-keys \
+--public-ip-address vmss-publicipaddress-01 \
+--load-balancer $loadbalancer \
+--vnet-name $vnet\
+--subnet $subnet

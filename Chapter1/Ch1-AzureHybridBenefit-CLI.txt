@@ -1,0 +1,11 @@
+#Define variables
+rg = "RG01"
+vm = "VM01"
+location = "East US"
+#Create VM
+az vm create \
+    --resource-group $rg \
+    --name $vm \
+    --location $location \
+    --image win2019datacenter \
+    --license-type Windows_Server

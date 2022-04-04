@@ -1,0 +1,13 @@
+#Define variables
+location=“eastus2”
+rg=“VMSS-RG01”
+vmssname=“VMSS01”
+vmssadminuser=”vmssadmin”
+#Create VMSS
+az vmss create \
+  --resource-group $rg \
+  --name $vmssname \
+  --image UbuntuLTS \
+  --upgrade-policy-mode automatic \
+  --admin-username $vmssadminuser \
+  --generate-ssh-keys

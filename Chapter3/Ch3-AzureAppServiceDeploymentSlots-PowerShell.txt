@@ -1,0 +1,3 @@
+$ResourceGroup = "AppServiceRG01"
+$WebApp = "MBSPWebApp01"
+New-AzWebAppSlot -ResourceGroupName $ResourceGroup -name $WebApp -slot dev

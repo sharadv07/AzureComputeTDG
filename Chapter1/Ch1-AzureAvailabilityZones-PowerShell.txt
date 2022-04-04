@@ -1,0 +1,18 @@
+#Define variables
+$rg = "RG01"
+$location = "EastUS2"
+$vm = "vm01"
+$vNet = "vNET-01"
+$subnet = "Subnet01"
+$nsg = "NSG-01"
+$publicip = "PublicIP-01"
+#Create a VM in the availability zone
+New-AzVm `
+        -ResourceGroupName $rg `
+        -Name $vm `
+        -Location $location `
+        -VirtualNetworkName $vNet `
+        -SubnetName $Subnet `
+        -SecurityGroupName $nsg `
+        -PublicIpAddressName $publicip `
+	-Zone 2

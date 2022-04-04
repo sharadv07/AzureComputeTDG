@@ -1,0 +1,15 @@
+#Set the Webapp and GitHub variables
+$githubrepository="{URL-of-required-GitHub-repo}" 
+$githubtoken="{GitHub-access-token}"
+$webappname="{Name-Of-WebApp}"
+$webapplocation="{WebApp-Azure-Region}"
+# Setup GitHub token
+$PropertyObject = @{token = $githubtoken;}
+Set-AzResource -PropertyObject $PropertyObject -ResourceId /providers/Microsoft.Web/sourcecontrols/GitHub -ApiVersion 2015-08-01 -Force
+# Configure GitHub deployment from the required GitHub repo
+$PropertyObject = @{
+    repoUrl = "$githubrepository";
+    branch = "master";
+}
+# Set the Webapp with the GitHub configuration
+Set-AzResource -PropertyObject $PropertyObject -ResourceGroupName {resource-group-name} -ResourceType Microsoft.Web/sites/sourcecontrols -ResourceName $webappname/web -ApiVersion 2015-08-01 -Force

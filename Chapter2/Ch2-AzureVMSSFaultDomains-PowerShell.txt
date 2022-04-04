@@ -1,0 +1,19 @@
+#Define variables
+$RG = "VMSS-RG01"
+$location = "EastUS2"
+$VMSSname = "VMScaleSet01"
+$vnet = "VMSS-Vnet01"
+$subnet = "VMSS-Subnet01"
+$publicip = "VMSSPublicIPAddress"
+#Create VMSS with fault domain config
+New-AzVmss `
+  -ResourceGroupName $RG `
+  -Location $location`
+  -VMScaleSetName $VMSSname `
+  -VirtualNetworkName $vnet `
+  -SubnetName $subnet `
+  -PublicIpAddressName $publicip `
+  -LoadBalancerName "VMSSLoadBalancer" `
+  -UpgradePolicy "Automatic" `
+  -Zone "1", "2", "3"
+  -PlatformFaultDomainCount 3

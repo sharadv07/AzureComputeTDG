@@ -1,0 +1,33 @@
+#Define variables
+rg="VMSS-RG01"
+location="EastUS2"
+hostgroup="VMSS-HostGroup01"
+hostname="VMSS-Host01"
+adminusername="vmssadmin"
+vmssname="VMSS01"
+#Create a host group for the VMSS
+az vm host group create \
+   --name $hostgroup \
+   -g $rg \
+   -z 1 \
+   --platform-fault-domain-count 2
+   --automatic-placement true
+#Create a Dedicated Host
+az vm host create \
+   --host-group $hostgroup\
+   --name $hostname\
+   --sku ESv3-Type1 \
+   --platform-fault-domain 1 \
+   -g $rg
+
+#Create a VMSS
+az vmss create \
+  --resource-group $rg \
+  --name $vmssname \
+  --image UbuntuLTS \
+  --upgrade-policy-mode automatic \
+  --admin-username $adminusername \
+  --host-group $hostgroup \
+  --generate-ssh-keys \
+  --size Standard_D2s_v3 \
+  --zone 1

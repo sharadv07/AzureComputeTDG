@@ -1,0 +1,27 @@
+#Define variables
+$rg = "RG01"
+$location = "EastUS"
+$avs = "AVSet-01"
+$vm = "vm-01"
+$vNet = "vNET-01"
+$subnet = "Subnet01"
+$nsg = "NSG-01"
+$publicip = "PublicIP-01"
+#Create an availability set
+New-AzAvailabilitySet `
+   -Location $location `
+   -Name $avs `
+   -ResourceGroupName $rg `
+   -Sku aligned `
+   -PlatformFaultDomainCount 2 `
+   -PlatformUpdateDomainCount 5
+#Create a VM in the availability set
+New-AzVm `
+        -ResourceGroupName $rg `
+        -Name $vm `
+        -Location $location `
+        -VirtualNetworkName $vNet `
+        -SubnetName $Subnet `
+        -SecurityGroupName $nsg `
+        -PublicIpAddressName $publicip `
+        -AvailabilitySetName $avs

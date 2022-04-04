@@ -1,0 +1,1 @@
+New-AzWvdWorkspace -ResourceGroupName WVD-RG01 -Name WVD-Workspace-Pooled -Location 'eastus2' -FriendlyName 'WVD-Workspace-Pooled'-ApplicationGroupReference $null -Description 'Workspace for Pooled Desktops'

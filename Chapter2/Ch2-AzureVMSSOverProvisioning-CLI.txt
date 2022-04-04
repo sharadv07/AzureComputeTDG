@@ -1,0 +1,6 @@
+#Define variables
+vmssname=“vmss01”
+location=“eastus2”
+rg=“vmss-rg01”
+#Create VMSS with overprovisioning turned off (it’s enabled by default)
+az vmss create -g $rg -n $vmssname –-l $location --image ubuntults --disable-overprovision

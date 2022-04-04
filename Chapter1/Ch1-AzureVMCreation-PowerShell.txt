@@ -1,0 +1,21 @@
+#Define required variables
+$rg = "RG01"
+$vmname = "VM01"
+$location = "EastUS"
+$vnet = "vNET01"
+$subnet = "Subnet01"
+$nsg = "NSG01"
+$publicip = "publicIP01"
+#Create resource group for VM
+New-AzResourceGroup -Name $rg -Location $location
+#Create VM
+New-AzVm `
+    -ResourceGroupName $rg `
+    -Name $vmname `
+    -Location $location `
+    -VirtualNetworkName $vnet `
+    -SubnetName $subnet `
+    -Image Win2019Datacenter `
+    -SecurityGroupName $nsg `
+    -PublicIpAddressName $publicip `
+    -OpenPorts 3389

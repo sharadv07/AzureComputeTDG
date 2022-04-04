@@ -1,0 +1,14 @@
+#Define variables
+rg = "RG01"
+vm = "VM01"
+location = "East US"
+#Create Spot Instance with vmconfig
+az vm create \
+    --resource-group $rg \
+    --name $vm \
+    --location $location \
+    --image WindowsServer2019Datacenter \
+    --admin-username adminuser \
+    --priority Spot \
+    --max-price -1 \
+    --eviction-policy Deallocate

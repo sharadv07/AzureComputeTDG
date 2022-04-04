@@ -1,0 +1,27 @@
+New-AzWvdHostPool -ResourceGroupName WVD-RG01 `
+                            -Name PersonalHostPool `
+                            -Location 'eastus2' `
+                            -HostPoolType 'Personal' `
+                            -PersonalDesktopAssignmentType Automatic `
+                            -LoadBalancerType Persistent `
+                            -RegistrationTokenOperation 'Update' `
+                            -ExpirationTime $((get-date).ToUniversalTime().AddDays(1).ToString('yyyy-MM-ddTHH:mm:ss.fffffffZ')) `
+                            -Description 'Description' `
+                            -FriendlyName 'Friendly Name' `
+                            -VMTemplate $null `
+                            -ValidationEnvironment:$false `
+                            -PreferredAppGroup Desktop
+Here’s the code to create a pooled host pool:
+New-AzWvdHostPool -ResourceGroupName WVD-RG01 `
+                            -Name PooledHostPool01 `
+                            -Location 'eastus2' `
+                            -HostPoolType 'Pooled' `
+                            -LoadBalancerType 'BreadthFirst' `
+                            -RegistrationTokenOperation 'Update' `
+                            -ExpirationTime $((get-date).ToUniversalTime().AddDays(1).ToString('yyyy-MM-ddTHH:mm:ss.fffffffZ')) `
+                            -Description 'Description' `
+                            -FriendlyName 'Friendly Name' `
+                            -MaxSessionLimit 20 `
+                            -VMTemplate $null `
+                            -ValidationEnvironment:$false `
+                            -PreferredAppGroup Desktop

@@ -1,0 +1,20 @@
+#Define required variables
+rg = "RG01"
+location = "EastUS"
+vmname = "VM01"
+nsg = "NSG-01"
+publicip = "publicIP-01"
+#Create resource group for VM
+az group create --name $rg --location $location
+#Create VM and open RDP
+az vm create \
+    --resource-group $rg \
+    --name $vmname \
+    --image Win2019Datacenter \
+    --nsg $nsg \
+    --public-ip-address $publicip \
+    --public-ip-sku Standard \
+    --nsg-rule RDP \
+    --admin-username azureuser
+#Open RDP port
+az vm open-port -g $rg -n $vmname --port 3389 --priority 100

@@ -1,0 +1,6 @@
+#Set the web app variables
+WebappName="AppService$random"
+Location="EastUS"
+ResourceGroup = “ResourceGroup01"
+# Set scaling config during plan creation
+az appservice plan create --name $WebAppName --resource-group $ResourceGroup --location $Location --sku S1 --number-of-workers 3 --per-site-scaling

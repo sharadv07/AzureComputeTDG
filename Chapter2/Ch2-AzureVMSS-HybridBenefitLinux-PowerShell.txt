@@ -1,0 +1,11 @@
+#Define variables
+$RG = "VMSS-RG01"
+$vmssname = "VMSS01"
+$location = "EastUS2"
+#create VMSS with Azure Hybrid Benefit
+New-AzVmSS `
+    -ResourceGroupName $RG `
+    -Name $vmssname `
+    -Location $location `
+    -ImageName "RHEL" `
+    -LicenseType "RHEL_BYOS"

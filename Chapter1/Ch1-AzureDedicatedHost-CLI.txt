@@ -1,0 +1,31 @@
+#Define variables
+rg="RG01"
+location="EastUS2"
+vnet="vNet-01"
+hostgrpname="HostGroup"
+dhostname="DHost-01"
+vm="VM01"
+#Create Host Group
+az vm host group create \
+   --name $hostgrpname \
+   --resource-group $rg \
+   --location $location \
+   --zone 1 \
+   --automatic-placement true \
+   --platform-fault-domain-count 1
+#Create Dedicated Host
+az vm host create \
+   --host-group $hostgrpname \
+   --name $dhostname \
+   --sku ESv3-Type1 \
+   --location $location \
+   -g $rg
+#Create VM in Dedicated Host
+az vm create \
+   -n $vm \
+   --image Win2019Datacenter \
+   --host-group $hostgrpname \
+   --size Standard_E2s_v3 \
+   --location $location \
+   -g $rg \
+   --zone 1

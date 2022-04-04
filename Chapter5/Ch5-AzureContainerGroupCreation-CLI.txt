@@ -1,0 +1,7 @@
+# Create a resource group to host the container instance. In case of using an existing resource group skip this command and enter the required existing resource group in the next section.
+
+az group create --name ContainerRG01 --location eastus2
+
+#Create Container group using the Hello World Quickstart Linux image
+
+az container create --resource-group ContainerRG01 --name msbpcr01 --image mcr.microsoft.com/azuredocs/aci-helloworld --dns-name-label msbpcr01 --ports 80

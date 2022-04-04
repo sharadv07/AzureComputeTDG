@@ -1,0 +1,17 @@
+#Define variables
+$RG = “VMSS-RG01”
+$location = “EastUS2”
+$vmssname = “VMSS01”
+$vnet = “VMSS01-Vnet”
+$subnet = “VMSS01-Subnet”
+$vmsslb = “VMSS01-LB”
+$vmsspip = “VMSS01-PIP”
+#Create VMSS
+New-AzVmss -ResourceGroupName $RG `
+  -Location $location `
+  -VMScaleSetName $vmssname `
+  -VirtualNetworkName $vnet `
+  -SubnetName $subnet `
+  -PublicIpAddressName $vmsspip `
+  -LoadBalancerName $vmsslb `
+  -UpgradePolicyMode "Automatic"

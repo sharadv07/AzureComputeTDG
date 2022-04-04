@@ -1,0 +1,18 @@
+#Define the required variables
+resourcegroup = "RG01"
+location = "East US 2"
+ppgname = "PPG-01"
+vmname = "VM01"
+#Create a Proximity placement group
+az ppg create -n $ppgname \
+   -g $resourcegroup \
+   -l $location \
+   -t standard
+#Create a VM in the Proximity Placement Group
+az vm create \
+   -n $vmname \
+   -g $resourcegroup \
+   --image Win2019Datacenter \
+   --ppg $ppgname  \
+   --size Standard_D3_v4  \
+   -l $location

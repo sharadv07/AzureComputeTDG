@@ -1,0 +1,14 @@
+#Define variables
+rg="VMSS-RG01"
+$location = "EastUS2"
+$VMSSname = "VMScaleSet01"
+$vnet = "VMSS-Vnet01"
+#Create VMSS with fault domain config
+az vmss create \
+  --resource-group $rg \
+  --name myScaleSet \
+  --image UbuntuLTS \
+  --upgrade-policy-mode automatic \
+  --admin-username azureuser \
+  --platform-fault-domain-count 3\
+  --generate-ssh-keys

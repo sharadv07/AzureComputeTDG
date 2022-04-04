@@ -1,0 +1,18 @@
+# Set the public GitHub repository URL, AppName and Location variables.
+$githubrepo="https://github.com/Azure-Samples/html-docs-hello-world.git"
+$appname="MBSPWebApp01"
+$location="East US"
+$resourcegroup="AppServiceRG01"
+# Create a resource group to host the App Service.
+New-AzResourceGroup -Name $resourcegroup -Location $location
+# Create an App Service plan in Free tier.
+New-AzAppServicePlan -Name $appname -Location $location -ResourceGroupName $resourcegroup -Tier Free
+# Create a web app using the App Service Plan.
+New-AzWebApp -Name $appname -Location $location -AppServicePlan $appname -ResourceGroupName $resourcegroup
+# Configure GitHub deployment from your GitHub repo and deploy once.
+$PropertiesObject = @{
+    repoUrl = "$githubrepo";
+    branch = "master";
+    isManualIntegration = "true";
+}
+Set-AzResource -Properties $PropertiesObject -ResourceGroupName $resourcegroup -ResourceType Microsoft.Web/sites/sourcecontrols -ResourceName $appname/web -ApiVersion 2015-08-01 -Force

@@ -1,0 +1,7 @@
+#Define variables
+$rg = "RG01"
+$vm = "VM01"
+$location = "East US"
+#Create Spot Instance with vmconfig
+$vmConfig = New-AzVMConfig -VMName $vm -VMSize Standard_D1 -Priority "Spot" -MaxPrice -1 -EvictionPolicy Deallocate | `
+New-AzVM -ResourceGroupName $rg -Location $location -VM $vmConfig

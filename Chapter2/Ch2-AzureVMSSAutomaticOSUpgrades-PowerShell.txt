@@ -1,0 +1,5 @@
+#Define variables
+$rg = "VMSS-RG01"
+$vmssname = "VMSS-01"
+#Update scale set config
+Update-AzVmss -ResourceGroupName $RG -VMScaleSetName $vmssname -AutomaticOSUpgrade $true

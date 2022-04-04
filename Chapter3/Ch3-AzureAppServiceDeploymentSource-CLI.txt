@@ -1,0 +1,7 @@
+#Set the Webapp and GitHub variables
+githubrepos={URL-Of-GitHub-Repository} 
+githubtoken={GitHub-Access-Token}
+WebApp={WebAppName}
+ResourceGroup={ResourceGroupName}
+# Configure continuous deployment from GitHub. 
+az webapp deployment source config --name $WebApp --resource-group $ResourceGroup --repo-url $githubrepos --branch master --git-token $githubtoken

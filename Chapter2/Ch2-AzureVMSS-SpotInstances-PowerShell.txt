@@ -1,0 +1,16 @@
+#Define variables
+$location = "East US 2"
+$RG = "VMSS-RG01"
+$vmssname = "VMSS01"
+#Create vmss config for Spot instances
+$vmssConfig = New-AzVmssConfig `
+    -Location $location `
+    -SkuCapacity 2 `
+    -SkuName "Standard_DS2" `
+    -UpgradePolicyMode Automatic `
+    -SinglePlacementGroup False `
+    -Priority "Spot" `
+    -max-price 0.01538 `
+    -EvictionPolicy Delete
+#Create scale set with above config
+New-AzVmss -ResourceGroupName $RG -Name $vmssname -VirtualMachineScaleSet $vmssConfig

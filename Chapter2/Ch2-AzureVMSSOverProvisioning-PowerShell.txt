@@ -1,0 +1,10 @@
+#Define variables
+$location = “EastUS2”
+$RG = “VMSS-RG01”
+$vmssname = “VMSS01”
+# Create VMSS with overprovisioning turned off (its enabled by default)
+$vmssConfig = New-AzVmssConfig -Location $location `
+    -SkuCapacity 2 `
+    -SkuName “Standard_DS2” `
+     -OverProvision $False
+New-AzVmss -ResourceGroupName $rg -Name $vmssname -VirtualMachineScaleSet $vmssConfig

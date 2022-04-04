@@ -1,0 +1,1 @@
+az desktopvirtualization workspace create --resource-group "WVD-RG01" --location "eastus2" --description "Workspace for Pooled Desktops" --friendly-name "WVD-Workspace-Pooled" --tags WVD-Environment-Type="Pooled" --name "WVD-Workspace-Pooled2"

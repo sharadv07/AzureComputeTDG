@@ -1,0 +1,11 @@
+#Define variables
+$rg = "RG01"
+$vm = "VM01"
+$location = "East US"
+#Create VM
+New-AzVm `
+    -ResourceGroupName $rg `
+    -Name $vm `
+    -Location $location `
+    -ImageName "Win2019Datacenter" `
+    -LicenseType "Windows_Server"

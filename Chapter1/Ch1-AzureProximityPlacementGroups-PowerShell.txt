@@ -1,0 +1,17 @@
+#Define the required variables
+$resourceGroup = "RG01"
+$location = "East US 2"
+$ppgName = "PPG-01"
+$vmName = "VM01"
+# create the proximity placement group
+$ppg = New-AzProximityPlacementGroup `
+   -Location $location `
+   -Name $ppgName `
+   -ResourceGroupName $resourceGroup `
+   -ProximityPlacementGroupType Standard
+#create a VM in the Proximity Placement Group
+New-AzVm `
+  -ResourceGroupName $resourceGroup `
+  -Name $vmName `
+  -Location $location `
+  -ProximityPlacementGroup $ppg.Id

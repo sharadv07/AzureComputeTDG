@@ -1,0 +1,18 @@
+#Define variables
+$RG = "VMSSResourceGroup"
+$location = "EastUS2"
+$VMSSname = "VMScaleSet01"
+$vnet = "VMSS-Vnet"
+$subnet = "VMSS-Subnet"
+$publicIP = "VMSSPublicIPAddress"
+# Create VMSS in availability zone
+New-AzVmss `
+  -ResourceGroupName $RG`
+  -Location $location `
+  -VMScaleSetName $VMSSname `
+  -VirtualNetworkName $vnet `
+  -SubnetName $subnet `
+  -PublicIpAddressName $publicip `
+  -LoadBalancerName "VMSSLoadBalancer" `
+  -UpgradePolicy "Automatic" `
+  -Zone "1", "2", "3"

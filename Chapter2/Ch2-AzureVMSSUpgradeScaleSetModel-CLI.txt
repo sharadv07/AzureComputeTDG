@@ -1,0 +1,11 @@
+#Define variables
+rg="VMSS-RG01"
+vmssname="VMSS-01"
+adminusername="vmssadmin"
+#Update scale set config
+az vmss create --resource-group $rg \
+  --name $vmssname \
+  --image UbuntuLTS \
+  --upgrade-policy-mode automatic \
+  --admin-username $adminusername \
+  --generate-ssh-keys \

@@ -1,0 +1,21 @@
+#Define variables
+$subscriptionID = "12232-12148-329201-199101"
+$rg = "VMSS-RG01"
+$vmssname = "VMSS-01"
+$location = "EastUS2"
+$vnet = "VMSS01-vNET"
+$subnet = "VMSS01-Subnet"
+$loadbalancer = "VMSS01-LB"
+#Setup autoscaling rule
+New-AzureRmAutoscaleRule `
+  -MetricName "Percentage CPU" `
+  -MetricResourceId /subscriptions/$SubscriptionId/resourceGroups/$RG/providers/Microsoft.Compute/virtualMachineScaleSets/$vmssname `
+  -TimeGrain 00:05:00 `
+  -MetricStatistic "Average" `
+  -TimeWindow 00:15:00 `
+  -Operator "GreaterThan" `
+  -Threshold 90 `
+  -ScaleActionDirection "Increase" `
+  -ScaleActionScaleType "ChangeCount" `
+  -ScaleActionValue 2 `
+  -ScaleActionCooldown 00:15:00

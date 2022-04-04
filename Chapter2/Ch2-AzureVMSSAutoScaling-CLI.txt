@@ -1,0 +1,13 @@
+#Define variables
+$subscriptionID = "12232-12148-329201-199101"
+$rg = "VMSS-RG01"
+$vmssname = "VMSS-01"
+$location = "EastUS2"
+$vnet = "VMSS01-vNET"
+$subnet = "VMSS01-Subnet"
+$loadbalancer = "VMSS01-LB"
+#Create VMSS with scale-in policy
+New-AzVmss -ResourceGroupName $RG `
+  -Location $location `
+  -VMScaleSetName $vmssname `
+  -ScaleInPolicy "NewestVM"
